@@ -3,70 +3,26 @@ import { TProduct } from './product.interface';
 
 // Stationery Product Schema
 const productsSchema = new Schema<TProduct>({
-  name: {
+  title: {
     type: String,
-    required: [true, 'Name is required'],
+    required: [true, 'Title is required'],
   },
-  brand: {
+  image: {
     type: String,
-    required: [true, 'Brand is required'],
+    required: [true, 'Image is required'],
   },
-  price: {
-    type: Number,
-    required: [true, 'Price is required'],
-    min: [0, 'Price must be a positive number'],
-    validate: {
-      validator: (value: number) => value >= 0,
-      message: 'Price must be a non-negative number',
-    },
-  },
-  category: {
+  liveLink: {
     type: String,
-    enum: {
-      values: [
-        'Books',
-        'Art and Craft',
-        'Stationery',
-        'Classroom Supplies',
-      ],
-    },
-    required: true
+    required: [true, 'Image is required'],
   },
   description: {
     type: String,
-    required: [true, 'Description is required'],
+    required: [true, 'Image is required'],
   },
-  photo: {
-    type: String,
-    required: [true, 'Photo is required'],
-  },
-  quantity: {
-    type: Number,
-    required: [true, 'Quantity is required'],
-    min: [0, 'Price must be a positive number'],
-    validate: {
-      validator: (value: number) => value >= 0,
-      message: 'Price must be a non-negative number',
-    },
-  },
-  inStock: {
-    type: Number,
-    required: [true, 'Quantity is required'],
-    min: [0, 'Price must be a positive number'],
-    validate: {
-      validator: (value: number) => value >= 0,
-      message: 'Price must be a non-negative number',
-    },
-  },
-  stock: {
-    type: Boolean,
-    default: true,
-    // required: [true, 'In Stack is required']
-  }
-}, 
-{
-  timestamps: true,
 },
+  {
+    timestamps: true,
+  },
 );
 
 // Stationery Product Model

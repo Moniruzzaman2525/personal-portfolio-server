@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 import { AuthUser } from "../auth/auth.model"
 import AppError from "../../error/AppError"
-import { Orders } from "../order/order.module"
 import QueryBuilder from "../../builder/QueryBuilder";
 import { userSearchableFields } from "./admin.constant";
 import { TProduct } from "../products/product.interface";
@@ -54,45 +53,6 @@ const getAllUser = async (query: Record<string, unknown>) => {
     };
 };
 
-const getAllOrder = async (query: Record<string, unknown>) => {
-    const academicDepartmentQuery = new QueryBuilder(
-        Orders.find()
-            .populate('user')
-            .populate('product'),
-        query,
-    )
-        .search(userSearchableFields)
-        .filter()
-        .sort()
-        .paginate()
-        .fields();
-    const result = await academicDepartmentQuery.modelQuery;
-    const meta = await academicDepartmentQuery.countTotal();
-    return {
-        meta,
-        result,
-    };
-
-};
-const confirmOrder = async (orderId: string) => {
-    try {
-        const updatedOrder = await Orders.findByIdAndUpdate(
-            orderId,
-            { status: 'Shipped' },
-            { new: true }
-        );
-
-        if (!updatedOrder) {
-           throw new AppError(404, 'Product not found')
-        }
-
-        return { success: true, data: updatedOrder };
-    } catch (error) {
-        console.error("Error updating order status:", error);
-        return { success: false, message: "Failed to update order status" };
-    }
-};
-
 
 const updateProduct = async (orderId: string, productData: Partial<TProduct>) => {
     try {
@@ -111,5 +71,5 @@ const updateProduct = async (orderId: string, productData: Partial<TProduct>) =>
 
 
 export const adminServices = {
-    adminBlockUserFromDB, getAllUser, getAllOrder, confirmOrder, updateProduct
+    adminBlockUserFromDB, getAllUser, updateProduct
 }
