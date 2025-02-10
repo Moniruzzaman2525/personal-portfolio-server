@@ -5,25 +5,22 @@ import { TBlog } from "./blog.interface";
 const blogSchema = new Schema<TBlog>(
   {
 
-    id: {
-      type: String,
-      required: true,
-    },
     title: {
       type: String,
-      required: true,
+      required: [true, 'Title is required'],
     },
     content: {
       type: String,
-      required: true,
+      required: [true, 'Content is required'],
     },
     image: {
       type: String,
-      required: true,
+      required: [true, 'Image is required'],
     },
     category: {
       type: String,
-      enum: ['Technology', 'Business', 'Lifestyle', 'Health']
+      enum: ['Technology', 'Business', 'Lifestyle', 'Health'],
+      required: [true, 'Category is required'],
     }
   },
   {
