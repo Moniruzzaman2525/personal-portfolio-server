@@ -1,7 +1,7 @@
-export type TBlog=  {
-  id: string; 
-  title: string; 
-  description: string; 
-  image: string; 
-  date: Date; 
+export type TBlog = {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  category: 'Technology' | 'Business' | 'Lifestyle' | 'Health'
 }
