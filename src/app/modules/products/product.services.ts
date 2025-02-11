@@ -67,7 +67,18 @@ const updateProductIntoDB = async (
 };
 
 // Delete a Stationery Product Services
-const deleteProductFromDB = async (productId: string) => {
+const deleteProductFromDB = async (productId: string, userEmail: string) => {
+
+  const product = await Products.findById(productId);
+  if (!product) {
+    return false;
+  }
+
+  // Check if the product belongs to the requesting user
+  if (product.user !== userEmail) {
+    return false;
+  }
+
   const result = await Products.findByIdAndDelete(productId);
   if (!result) {
     return false;

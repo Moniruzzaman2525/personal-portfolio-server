@@ -117,19 +117,27 @@ const deleteProduct = async (
 ) => {
   try {
     const { productId } = req.params;
-    const result = await ProductsServices.deleteProductFromDB(productId);
+    const userEmail = req.headers["user-email"] as string
 
-    // product not found
-    if (!result) {
-      res.status(404).json({
-        message: 'Product not found',
+    if (!userEmail) {
+      res.status(400).json({
+        message: "User email is required",
         success: false,
       });
-      return;
+      return
+    }
+    const result = await ProductsServices.deleteProductFromDB(productId, userEmail);
+
+    if (!result) {
+      res.status(404).json({
+        message: "Product not found or you are not authorized to delete it",
+        success: false,
+      });
+      return
     }
 
     res.status(200).json({
-      message: 'Product deleted successfully',
+      message: "Product deleted successfully",
       success: true,
       data: {},
     });
