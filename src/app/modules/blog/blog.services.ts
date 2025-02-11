@@ -19,6 +19,23 @@ const getAllBlog = async (query: Record<string, unknown>) => {
     };
 };
 
+const getUserBlogs = async (query: Record<string, unknown>, userEmail: string) => {
+    const blogQuery = new QueryBuilder(Blogs.find({ user: userEmail }), query)
+        .search(["title"])
+        .sort()
+        .paginate()
+        .fields();
+
+    const data = await blogQuery.modelQuery;
+    const meta = await blogQuery.countTotal();
+
+    return {
+        meta,
+        data,
+    };
+};
+
+
 
 const getSingleBlog = async (id: string) => {
     const result = await Blogs.findById(id);
@@ -46,4 +63,5 @@ export const blogServices = {
     createBlog,
     updateBlog,
     deleteBlog,
+    getUserBlogs
 };

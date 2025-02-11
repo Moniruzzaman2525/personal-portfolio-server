@@ -16,6 +16,20 @@ const getAllBlog = catchAsync(async (req, res) => {
 });
 
 
+const getUserBlog = catchAsync(async (req, res) => {
+    const query = req.query;
+    const userEmail = req.headers["user-email"] as string;
+    const result = await blogServices.getUserBlogs(query, userEmail);
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Blogs fetched successfully",
+        meta: result.meta,
+        data: result.data,
+    });
+});
+
+
 const getSingleBlog = catchAsync(async (req, res) => {
     const blogId = req.params.blogId;
     const result = await blogServices.getSingleBlog(blogId);
@@ -69,4 +83,5 @@ export const blogController = {
     createBlog,
     updateBlog,
     deleteBlog,
+    getUserBlog
 };

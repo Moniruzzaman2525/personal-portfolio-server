@@ -17,6 +17,10 @@ const blogSchema = new Schema<TBlog>(
       type: String,
       required: [true, 'Image is required'],
     },
+    user: {
+      type: String,
+      required: [true, 'User is required'],
+    },
     category: {
       type: String,
       enum: ['Technology', 'Business', 'Lifestyle', 'Health'],

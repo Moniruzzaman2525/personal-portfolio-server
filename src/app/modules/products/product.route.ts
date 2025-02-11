@@ -6,6 +6,7 @@ const router = express.Router();
 
 // Create a Stationery Product Router
 router.post('/', ProductsControllers.createProduct);
+router.get('/user-projects', ProductsControllers.getUserProject);
 
 // Get All Stationery Products Router
 router.get('/', ProductsControllers.getAllProducts);

@@ -58,6 +58,18 @@ const refreshToken = catchAsync(async (req, res) => {
         data: result,
     });
 });
+const storeToken = catchAsync(async (req, res) => {
+    const tokenData = req.body;
+    console.log(req.body)
+    const result = await authUserServices.storeUserInToDb(tokenData);
+
+    return sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Access token stored successfully!",
+        data: result,
+    });
+});
 
 
 const updateProfile = catchAsync(async (req, res) => {
@@ -92,4 +104,5 @@ export const userControllers = {
     refreshToken,
     getMe,
     updateProfile,
+    storeToken
 }

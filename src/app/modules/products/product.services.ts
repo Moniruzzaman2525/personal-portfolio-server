@@ -75,6 +75,21 @@ const deleteProductFromDB = async (productId: string) => {
   return result;
 };
 
+const getUserProject = async (query: Record<string, unknown>, userEmail: string) => {
+  const blogQuery = new QueryBuilder(Products.find({ user: userEmail }), query)
+    .search(["title"])
+    .sort()
+    .paginate()
+    .fields();
+
+  const data = await blogQuery.modelQuery;
+  const meta = await blogQuery.countTotal();
+
+  return {
+    meta,
+    data,
+  };
+};
 
 
 // export Stationery Product Services
@@ -84,4 +99,5 @@ export const ProductsServices = {
   getSingleIntoDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  getUserProject
 };

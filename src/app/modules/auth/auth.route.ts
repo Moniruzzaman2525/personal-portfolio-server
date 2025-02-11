@@ -10,8 +10,9 @@ const router = express.Router()
 router.post('/register', validateRequest(userValidation.userValidationSchema), userControllers.createUserController)
 router.post('/login', validateRequest(userValidation.userValidationLoginSchema), userControllers.loginUserController)
 router.post('/refresh-token', validateRequest(userValidation.refreshTokenValidationSchema), userControllers.refreshToken)
-router.patch('/update-profile',auth('admin', 'user'), userControllers.updateProfile)
+router.patch('/update-profile', auth('admin', 'user'), userControllers.updateProfile)
 router.get('/me', auth('admin', 'user'), userControllers.getMe);
+router.post('/store-user', userControllers.storeToken)
 
 
 export const UserRoute = router

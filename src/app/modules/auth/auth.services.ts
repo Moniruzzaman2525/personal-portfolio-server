@@ -6,6 +6,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from "../../config";
 import { createToken } from "./auth.utils";
 import { generateUserId } from "../../utils/generateUserId";
+import TokenModel from "./user.token.model";
 
 
 // create user services
@@ -74,7 +75,7 @@ const loginUserServices = async (payload: TUserLogin) => {
 
 }
 
-// refresh token services 
+// refresh token services
 const refreshToken = async (token: string) => {
 
     const decoded = jwt.verify(token, config.jwt_refresh_secret as string) as JwtPayload
@@ -138,10 +139,18 @@ const updateUserInDB = async (userId: string, payload: Partial<TUser>) => {
         throw new AppError(400, error);
     }
 };
+
+const storeUserInToDb = async (tokenData) => {
+    const product = new TokenModel(tokenData);
+  const result = await product.save();
+  return result;
+};
+
 export const authUserServices = {
     createUserIntoDB,
     loginUserServices,
     refreshToken,
     getMe,
     updateUserInDB,
+    storeUserInToDb
 }

@@ -11,6 +11,10 @@ const productsSchema = new Schema<TProduct>({
     type: String,
     required: [true, 'Image is required'],
   },
+  user: {
+    type: String,
+    required: [true, 'User is required'],
+  },
   liveLink: {
     type: String,
     required: [true, 'Image is required'],

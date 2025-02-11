@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ProductsServices } from './product.services';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
 
 // Create a Stationery Product controller
 const createProduct = async (
@@ -136,6 +138,20 @@ const deleteProduct = async (
   }
 };
 
+
+const getUserProject = catchAsync(async (req, res) => {
+  const query = req.query;
+  const userEmail = req.headers["user-email"] as string;
+  const result = await ProductsServices.getUserProject(query, userEmail);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Blogs fetched successfully",
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
 // export Stationery Product Controller
 export const ProductsControllers = {
   createProduct,
@@ -143,4 +159,5 @@ export const ProductsControllers = {
   getSingleProduct,
   updateProduct,
   deleteProduct,
+  getUserProject
 };
