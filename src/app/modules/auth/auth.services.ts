@@ -140,11 +140,7 @@ const updateUserInDB = async (userId: string, payload: Partial<TUser>) => {
     }
 };
 
-const storeUserInToDb = async (tokenData) => {
-    const product = new TokenModel(tokenData);
-  const result = await product.save();
-  return result;
-};
+
 
 export const authUserServices = {
     createUserIntoDB,
@@ -152,5 +148,4 @@ export const authUserServices = {
     refreshToken,
     getMe,
     updateUserInDB,
-    storeUserInToDb
 }
