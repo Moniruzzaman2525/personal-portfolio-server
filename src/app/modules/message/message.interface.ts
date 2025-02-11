@@ -3,4 +3,5 @@ export type TMessage = {
     email: string;
     subject: string;
     message: string;
+    user: string;
 }

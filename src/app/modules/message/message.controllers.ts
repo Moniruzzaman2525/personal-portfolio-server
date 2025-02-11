@@ -4,7 +4,7 @@ import { MessageServices } from "./message.services";
 import sendResponse from "../../utils/sendResponse";
 export const createMessage = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { content } = req.body;
+        const content = req.body;
         const newMessage = await MessageServices.createMessageInDB(content);
 
         res.status(201).json({
@@ -32,7 +32,7 @@ const getUserMessages = catchAsync(async (req, res) => {
         statusCode: 200,
         success: true,
         message: "Blogs fetched successfully",
-        meta: messages,
+        data: messages,
     });
 });
 

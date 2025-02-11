@@ -7,7 +7,7 @@ const createMessageInDB = async (content: string) => {
 }
 
 const getMessagesByUser = async (userEmail: string) => {
-    return await Message.find({ user: userEmail }).sort({ createdAt: -1 });
+    return await Message.find({ user: userEmail })
 }
 
 export const MessageServices = {

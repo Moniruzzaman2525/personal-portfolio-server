@@ -15,7 +15,7 @@ router.get('/', ProductsControllers.getAllProducts);
 router.get('/:productId', ProductsControllers.getSingleProduct);
 
 // // Update a Stationery Product Router
-// router.patch('/:productId', ProductsControllers.updateProduct);
+router.patch('/:productId', ProductsControllers.updateProduct);
 
 // // Delete a Stationery Product Router
 router.delete('/:productId', auth('admin'), ProductsControllers.deleteProduct);
