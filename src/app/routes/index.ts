@@ -17,7 +17,7 @@ const moduleRoutes = [
         route: AdminRoute
     },
     {
-        path: '/products',
+        path: '/projects',
         route: productRoute
     },
     {
