@@ -4,9 +4,8 @@ import { MessageServices } from "./message.services";
 import sendResponse from "../../utils/sendResponse";
 export const createMessage = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const userEmail = req.headers["user-email"] as string;
         const { content } = req.body;
-        const newMessage = await MessageServices.createMessageInDB(userEmail, content);
+        const newMessage = await MessageServices.createMessageInDB(content);
 
         res.status(201).json({
             message: "Message created successfully",

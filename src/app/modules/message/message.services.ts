@@ -1,14 +1,9 @@
 import Message from "./message.model";
 
+const createMessageInDB = async (content: string) => {
+    const newMessage = await Message.create(content)
 
-const createMessageInDB = async (userEmail: string, content: string) => {
-    const newMessage = new Message({
-        user: userEmail,
-        content,
-        createdAt: new Date(),
-    });
-
-    return await newMessage.save();
+    return newMessage
 }
 
 const getMessagesByUser = async (userEmail: string) => {
